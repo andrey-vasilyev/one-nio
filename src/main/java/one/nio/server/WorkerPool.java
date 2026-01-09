@@ -16,6 +16,7 @@
 
 package one.nio.server;
 
+import one.nio.os.PayloadThread;
 import one.nio.os.SchedulingPolicy;
 
 import org.slf4j.Logger;

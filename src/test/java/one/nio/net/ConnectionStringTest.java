@@ -16,7 +16,7 @@
 
 package one.nio.net;
 
-import one.nio.mgt.ManagementServer;
+import one.nio.http.ManagementServer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

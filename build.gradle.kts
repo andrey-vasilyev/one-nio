@@ -8,21 +8,28 @@ group = "ru.odnoklassniki"
 version = semVer ?: "2.1-SNAPSHOT"
 
 plugins {
-    id("org.cadixdev.licenser") version "0.6.1"
+    id("dev.yumi.gradle.licenser")
     `java-library`
-    id("org.jreleaser") version "1.20.0"
+    id("org.jreleaser")
     `maven-publish`
 }
 
-repositories {
-    mavenCentral()
-    maven("https://plugins.gradle.org/m2")
-}
-
 dependencies {
-    implementation(group = "org.ow2.asm", name = "asm", version = "9.8")
-    implementation(group = "org.ow2.asm", name = "asm-util", version = "9.8")
-    implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.36")
+    api(project(":async"))
+    api(project(":cluster"))
+    api(project(":config"))
+    api(project(":compiler"))
+    api(project(":gen"))
+    api(project(":lock"))
+    api(project(":mem"))
+    api(project(":mgt"))
+    api(project(":pool"))
+    api(project(":serial"))
+    api(project(":util"))
+
+    implementation(libs.asm)
+    implementation(libs.asm.util)
+    implementation(libs.slf4j.api)
 
     testImplementation(group = "junit", name = "junit", version = "4.13.2")
     testRuntimeOnly(group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version = "2.24.3")
@@ -201,7 +208,7 @@ tasks.compileJava {
 license {
     include("**/*.java")
     exclude("**/lz4/*.java")
-    header(rootProject.file("COPYRIGHT_HEADER.txt"))
+    rule(rootProject.file("COPYRIGHT_HEADER.txt"))
 }
 
 val repoUrl: String = project.properties["repoUrl"] as? String ?: "https://maven.pkg.github.com/odnoklassniki/one-nio"
@@ -209,8 +216,10 @@ val repoUrl: String = project.properties["repoUrl"] as? String ?: "https://maven
 jreleaser {
     signing {
         active = Active.ALWAYS
-        armored = true
-        verify = true
+        pgp {
+            armored = true
+            verify = true
+        }
     }
     release {
         github {
@@ -329,9 +338,4 @@ fun MavenPublication.addPom() {
             }
         }
     }
-}
-
-tasks.wrapper {
-    gradleVersion = "8.3"
-    distributionType = Wrapper.DistributionType.ALL
 }

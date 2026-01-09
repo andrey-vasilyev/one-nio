@@ -18,7 +18,7 @@ package one.nio.rpc;
 
 import one.nio.net.ConnectionString;
 import one.nio.net.Socket;
-import one.nio.pool.SocketPool;
+import one.nio.net.SocketPool;
 import one.nio.rpc.stream.RpcStreamImpl;
 import one.nio.serial.CalcSizeStream;
 import one.nio.serial.DataStream;

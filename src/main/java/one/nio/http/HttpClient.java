@@ -22,7 +22,7 @@ import one.nio.net.HttpProxy;
 import one.nio.net.Socket;
 import one.nio.net.SocketClosedException;
 import one.nio.pool.PoolException;
-import one.nio.pool.SocketPool;
+import one.nio.net.SocketPool;
 import one.nio.util.Utf8;
 
 import org.slf4j.Logger;
