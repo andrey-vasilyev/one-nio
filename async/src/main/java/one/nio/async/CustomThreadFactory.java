@@ -17,7 +17,7 @@
 package one.nio.async;
 
 import one.nio.os.SchedulingPolicy;
-import one.nio.server.PayloadThread;
+import one.nio.os.PayloadThread;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;

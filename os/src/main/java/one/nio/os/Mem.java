@@ -23,8 +23,6 @@ import java.io.FileDescriptor;
 public final class Mem {
     public static final boolean IS_SUPPORTED = NativeLibrary.IS_SUPPORTED;
 
-    private static final long fdField = JavaInternals.fieldOffset(FileDescriptor.class, "fd");
-
     public static final int PROT_NONE  = 0;
     public static final int PROT_READ  = 1;
     public static final int PROT_WRITE = 2;
@@ -51,7 +49,7 @@ public final class Mem {
     public static native int mprotect(long addr, long len, int prot);
 
     public static long mmap(long addr, long length, int prot, int flags, FileDescriptor fd, long offset) {
-        return mmap(addr, length, prot, flags, getFD(fd), offset);
+        return mmap(addr, length, prot, flags, JavaInternals.getFD(fd), offset);
     }
 
     public static final int MS_ASYNC      = 1;
@@ -86,14 +84,7 @@ public final class Mem {
     public static native int posix_fadvise(int fd, long offset, long len, int advice);
 
     public static int posix_fadvise(FileDescriptor fd, long offset, long len, int advice) {
-        return posix_fadvise(getFD(fd), offset, len, advice);
+        return posix_fadvise(JavaInternals.getFD(fd), offset, len, advice);
     }
 
-    public static int getFD(FileDescriptor fd) {
-        return JavaInternals.unsafe.getInt(fd, fdField);
-    }
-
-    public static void setFD(FileDescriptor fd, int val) {
-        JavaInternals.unsafe.putInt(fd, fdField, val);
-    }
 }

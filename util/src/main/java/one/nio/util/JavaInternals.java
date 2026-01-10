@@ -18,6 +18,7 @@ package one.nio.util;
 
 import sun.misc.Unsafe;
 
+import java.io.FileDescriptor;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -30,6 +31,7 @@ public final class JavaInternals {
 
     private static final boolean hasModules = !System.getProperty("java.version").startsWith("1.");
     private static final long accessibleOffset = getAccessibleOffset();
+    private static final long fdField = fieldOffset(FileDescriptor.class, "fd");
 
     public static Unsafe getUnsafe() {
         try {
@@ -260,5 +262,13 @@ public final class JavaInternals {
 
     public static void putDouble(Object o, double value, long offset) {
         unsafe.putDouble(o, offset, value);
+    }
+
+    public static int getFD(FileDescriptor fd) {
+        return unsafe.getInt(fd, fdField);
+    }
+
+    public static void setFD(FileDescriptor fd, int val) {
+        unsafe.putInt(fd, fdField, val);
     }
 }

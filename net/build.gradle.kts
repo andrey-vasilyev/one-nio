@@ -1,12 +1,12 @@
 plugins {
     id("one-nio.java-library-conventions")
     id("one-nio.license-conventions")
+    id("one-nio.native-library-companion-conventions")
 }
 
 dependencies {
-    implementation(project(":gen"))
+    implementation(project(":mem"))
     implementation(project(":mgt"))
-    implementation(project(":reflection"))
     implementation(project(":util"))
     implementation(libs.slf4j.api)
 }

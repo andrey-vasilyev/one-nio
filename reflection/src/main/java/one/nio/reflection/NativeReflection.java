@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
  * fail with NoClassDefFoundError due to some missing class file.
  */
 public class NativeReflection {
-    public static final boolean IS_SUPPORTED = NativeLibraryLoader.loadNativeLibrary("onenio-reflection-native") && initJVMTI();
+    public static final boolean IS_SUPPORTED = NativeLibraryLoader.loadNativeLibrary("onenio-reflection") && initJVMTI();
 
     private static native boolean initJVMTI();
 

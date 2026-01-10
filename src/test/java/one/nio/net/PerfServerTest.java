@@ -17,7 +17,7 @@
 package one.nio.net;
 
 import one.nio.mem.DirectMemory;
-import one.nio.os.Mem;
+import one.nio.util.JavaInternals;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class PerfServerTest {
 
         RandomAccessFile raf = new RandomAccessFile(mapPath, "rw");
         raf.setLength(mapSize);
-        int fd = Mem.getFD(raf.getFD());
+        int fd = JavaInternals.getFD(raf.getFD());
 
         MappedByteBuffer map = raf.getChannel().map(FileChannel.MapMode.READ_WRITE, 0, mapSize);
         long mapAddr = DirectMemory.getAddress(map);

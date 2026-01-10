@@ -17,7 +17,6 @@
 package one.nio.net;
 
 import one.nio.mem.DirectMemory;
-import one.nio.os.Mem;
 import one.nio.util.JavaInternals;
 
 import java.io.IOException;
@@ -191,7 +190,7 @@ class NativeSocket extends Socket {
 
     @Override
     public long sendFile(RandomAccessFile file, long offset, long count) throws IOException {
-        return sendFile0(Mem.getFD(file.getFD()), offset, count);
+        return sendFile0(JavaInternals.getFD(file.getFD()), offset, count);
     }
 
     @Override

@@ -23,6 +23,8 @@ dependencies {
     api(project(":lock"))
     api(project(":mem"))
     api(project(":mgt"))
+    api(project(":net"))
+    api(project(":os"))
     api(project(":pool"))
     api(project(":serial"))
     api(project(":util"))

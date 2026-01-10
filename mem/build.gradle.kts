@@ -4,8 +4,11 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":async"))
     implementation(project(":lock"))
     implementation(project(":mgt"))
+    implementation(project(":os"))
+    implementation(project(":serial"))
     implementation(project(":util"))
     implementation(libs.slf4j.api)
 }
